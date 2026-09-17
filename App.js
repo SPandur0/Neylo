@@ -1,4 +1,9 @@
+import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
+import LaunchScreen, { neyloSplash } from './Components/LaunchScreen';
+import { neyloSymbol } from './Components/NeyloLogo';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -26,10 +31,28 @@ const theme = {
   }
 };
 export default function App() {
+  const [resourcesReady, setResourcesReady] = useState(false);
+  const [navigationReady, setNavigationReady] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    Promise.allSettled([
+      Font.loadAsync(Ionicons.font),
+      Asset.loadAsync([neyloSymbol, neyloSplash]),
+    ]).then(results => {
+      for (const result of results) {
+        if (result.status === 'rejected') console.warn('Startup asset could not load:', result.reason);
+      }
+      if (active) setResourcesReady(true);
+    });
+    return () => { active = false; };
+  }, []);
+
   return <SafeAreaProvider>
     <StatusBar style="dark" />
+    <LaunchScreen ready={resourcesReady && navigationReady}>
     <FinanceProvider>
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme} onReady={() => setNavigationReady(true)}>
       <Tab.Navigator screenOptions={({
         route
       }) => ({
@@ -50,5 +73,6 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
     </FinanceProvider>
+    </LaunchScreen>
   </SafeAreaProvider>;
 }

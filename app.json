@@ -1,24 +1,39 @@
 {
   "expo": {
-    "name": "Finora",
+    "name": "Neylo",
     "slug": "min_app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/branding/neylo-icon.png",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "backgroundColor": "#fdfcfb",
+        "foregroundImage": "./assets/branding/neylo-icon.png"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/branding/neylo-icon.png"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#fefcfa",
+          "image": "./assets/branding/neylo-splash.png",
+          "imageWidth": 360,
+          "resizeMode": "contain",
+          "android": {
+            "image": "./assets/branding/neylo-symbol.png",
+            "imageWidth": 160
+          }
+        }
+      ],
+      "expo-font",
+      "expo-asset"
+    ]
   }
 }

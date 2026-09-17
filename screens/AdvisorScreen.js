@@ -61,7 +61,7 @@ export default function AdvisorScreen() {
           <ActionButton label="Spørg din Advisor" icon="sparkles-outline" onPress={askAdvisor} />
           {answer && <View accessibilityLiveRegion="polite" style={styles.answer}>
             <Text style={styles.answerQuestion}>{answer.question}</Text>
-            <Text style={styles.eyebrow}>FINORA · DEMOSVAR</Text>
+            <Text style={styles.eyebrow}>NEYLO · DEMOSVAR</Text>
             <Text style={styles.bodyText}>{answer.text}</Text>
           </View>}
         </View>

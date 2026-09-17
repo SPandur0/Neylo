@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon, ActionButton } from '../Components/FinanceUI';
 import ExpenseChart from '../Components/ExpenseChart';
 import SavingsChart from '../Components/SavingsChart';
+import NeyloLogo from '../Components/NeyloLogo';
 import { useFinances } from '../context/FinanceContext';
 import { money } from '../data/financeData';
 import { styles, colors } from '../styles/styles';
@@ -23,8 +24,8 @@ export default function HomeScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.topBar}>
           <View style={styles.brand}>
-            <View style={styles.brandMark}><Icon name="leaf" color="#fff" size={20} /></View>
-            <Text style={styles.brandName}>finora<Text style={styles.brandDot}>.</Text></Text>
+            <NeyloLogo />
+            <Text style={styles.brandName}>neylo<Text style={styles.brandDot}>.</Text></Text>
           </View>
           <View style={styles.demoPill}><View style={styles.dot} /><Text style={styles.demoText}>DEMO</Text></View>
         </View>
