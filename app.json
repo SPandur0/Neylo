@@ -34,7 +34,13 @@
       ],
       "expo-font",
       "expo-asset",
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow Neylo to use Face ID to protect your financial information."
+        }
+      ]
     ]
   }
 }

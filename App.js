@@ -3,6 +3,8 @@ import { createPagerNavigator } from './navigation/PagerNavigator';
 import { StatusBar } from 'expo-status-bar';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
+import AppLockGate from './Components/AppLockGate';
+import { AppLockProvider, useAppLock } from './context/AppLockContext';
 import LaunchScreen, { neyloSplash } from './Components/LaunchScreen';
 import { neyloSymbol } from './Components/NeyloLogo';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
@@ -31,6 +33,11 @@ const theme = {
   }
 };
 export default function App() {
+  return <AppLockProvider><AppContent /></AppLockProvider>;
+}
+
+function AppContent() {
+  const lock = useAppLock();
   const [resourcesReady, setResourcesReady] = useState(false);
   const [databaseReady, setDatabaseReady] = useState(false);
   const handleDatabaseReady = useCallback(() => setDatabaseReady(true), []);
@@ -51,7 +58,8 @@ export default function App() {
 
   return <SafeAreaProvider>
     <StatusBar style="dark" />
-    <LaunchScreen ready={resourcesReady && databaseReady}>
+    <LaunchScreen ready={resourcesReady && lock.ready && (lock.locked || databaseReady)} onFinished={lock.controller.finishSplash}>
+    <AppLockGate>
     <FinanceProvider onReady={handleDatabaseReady}>
     <NavigationContainer theme={theme}>
       <Tab.Navigator screenOptions={({
@@ -74,6 +82,7 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
     </FinanceProvider>
+    </AppLockGate>
     </LaunchScreen>
   </SafeAreaProvider>;
 }

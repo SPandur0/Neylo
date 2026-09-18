@@ -13,7 +13,7 @@ if (Platform.OS !== 'web') {
   SplashScreen.setOptions({ fade: false });
 }
 
-export default function LaunchScreen({ ready, children }) {
+export default function LaunchScreen({ ready, children, onFinished }) {
   const opacity = useRef(new Animated.Value(1)).current;
   const [visible, setVisible] = useState(true);
   const [imageReady, setImageReady] = useState(false);
@@ -48,10 +48,13 @@ export default function LaunchScreen({ ready, children }) {
       useNativeDriver: Platform.OS !== 'web',
     });
     animation.start(({ finished }) => {
-      if (finished) setVisible(false);
+      if (finished) {
+        setVisible(false);
+        onFinished?.();
+      }
     });
     return () => animation.stop();
-  }, [ready, holdComplete, visible, opacity]);
+  }, [ready, holdComplete, visible, opacity, onFinished]);
 
   return <View style={launchStyles.root}>
     <View style={launchStyles.root} accessibilityElementsHidden={visible} importantForAccessibility={visible ? 'no-hide-descendants' : 'auto'}>
