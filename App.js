@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { createPagerNavigator } from './navigation/PagerNavigator';
 import { StatusBar } from 'expo-status-bar';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import LaunchScreen, { neyloSplash } from './Components/LaunchScreen';
 import { neyloSymbol } from './Components/NeyloLogo';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen';
@@ -13,7 +13,7 @@ import IncomeExpensesScreen from './screens/IncomeExpensesScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import { FinanceProvider } from './context/FinanceContext';
 import { colors, styles } from './styles/styles';
-const Tab = createBottomTabNavigator();
+const Tab = createPagerNavigator();
 const icons = {
   Home: 'grid-outline',
   'Income & Expenses': 'swap-horizontal-outline',
@@ -32,7 +32,8 @@ const theme = {
 };
 export default function App() {
   const [resourcesReady, setResourcesReady] = useState(false);
-  const [navigationReady, setNavigationReady] = useState(false);
+  const [databaseReady, setDatabaseReady] = useState(false);
+  const handleDatabaseReady = useCallback(() => setDatabaseReady(true), []);
 
   useEffect(() => {
     let active = true;
@@ -50,9 +51,9 @@ export default function App() {
 
   return <SafeAreaProvider>
     <StatusBar style="dark" />
-    <LaunchScreen ready={resourcesReady && navigationReady}>
-    <FinanceProvider>
-    <NavigationContainer theme={theme} onReady={() => setNavigationReady(true)}>
+    <LaunchScreen ready={resourcesReady && databaseReady}>
+    <FinanceProvider onReady={handleDatabaseReady}>
+    <NavigationContainer theme={theme}>
       <Tab.Navigator screenOptions={({
         route
       }) => ({

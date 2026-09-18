@@ -4,6 +4,7 @@ export const colors = {
   surface: '#ffffff',
   ink: '#203a31',
   green: '#285747',
+  destructive: '#87464D',
   muted: '#7b857d',
   border: '#e7ebe4'
 };
@@ -28,8 +29,7 @@ export const styles = StyleSheet.create({
   iconButton: { minWidth: 44, minHeight: 44, justifyContent: 'center', alignItems: 'center' },
   entryInput: { minHeight: 50, padding: 14, borderWidth: 1, borderColor: '#dce2d8', borderRadius: 12, backgroundColor: '#fff', color: colors.ink, fontSize: 16 },
   categoryOptions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  deleteButton: { minHeight: 44, alignItems: 'center', justifyContent: 'center' },
-  deleteConfirmation: { padding: 14, borderRadius: 13, backgroundColor: '#f9eade', gap: 8 },
+  deleteConfirmation: { padding: 14, borderRadius: 13, backgroundColor: '#f9eade', gap: 13 },
   screen: {
     flex: 1,
     backgroundColor: colors.background
@@ -357,7 +357,21 @@ export const styles = StyleSheet.create({
     fontWeight: '600'
   },
   secondaryButton: {
-    backgroundColor: '#e7efdf'
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: '#718579',
+    // Include the border in the existing 14-point content inset.
+    padding: 13
+  },
+  secondaryButtonPressed: {
+    backgroundColor: '#e7efdf',
+    borderColor: colors.green
+  },
+  destructiveButton: {
+    backgroundColor: colors.destructive
+  },
+  disabledButton: {
+    opacity: 0.45
   },
   secondaryButtonText: {
     color: colors.green

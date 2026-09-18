@@ -8,7 +8,9 @@ The splash background `#fefcfa` matches the average outer-edge color of the supp
 
 ## Startup behavior
 
-`expo-splash-screen` holds the native launch screen until the React splash image is loaded and laid out. iOS uses the complete artwork; Android uses the N-only system splash to respect its system icon constraints, then hands off to the full artwork. The overlay fades out over 220 ms after the bundled branding assets, Ionicons font and navigation are ready. There is no minimum display timer. Failed asset loading is reported and does not intentionally block entry into the app.
+`expo-splash-screen` holds the native launch screen until the React splash image is loaded and laid out. iOS uses the complete artwork; Android uses the N-only system splash to respect its system icon constraints, then hands off to the full artwork. After that handoff, the custom overlay stays fully visible for 1,300 ms, then fades out over 500 ms with a quadratic ease-in-out (1,800 ms total). If the bundled branding assets, Ionicons font or navigation need longer than the initial hold, the fade waits until they are ready. Native launch time precedes this custom transition. Failed asset loading is reported and does not intentionally block entry into the app.
+
+The overlay lives at the app root and is removed after its first fade. Navigation and returning from the background do not remount it or reset its state; a new app instance (cold start or full reload) shows it again. The hold timer and animation are cleaned up on unmount.
 
 Native icon and splash configuration requires a new native build. Verify cold launches in an iOS and Android release build; Expo Go does not reproduce the native splash configuration. Also check narrow browser windows and warm launches. See https://docs.expo.dev/versions/latest/sdk/splash-screen/.
 

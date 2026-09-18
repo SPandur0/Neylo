@@ -3,7 +3,7 @@ import Svg, { Circle, Line, Path, Text as SvgText } from 'react-native-svg';
 import { months, money, savingsHistoryPoints } from '../data/financeData';
 import { styles, colors } from '../styles/styles';
 
-export default function SavingsChart({ history }) {
+export default function SavingsChart({ history, label = 'Total Savings' }) {
   const points = savingsHistoryPoints(history);
   const maximum = Math.max(1, ...points.map(point => point.amount));
   const x = monthIndex => 110 + monthIndex * 39;
@@ -12,16 +12,15 @@ export default function SavingsChart({ history }) {
 
   return (
     <View style={styles.chartCard}>
-      <Text style={styles.sectionTitle}>Savings Development</Text>
-      <Text style={styles.subtitle}>Savings + Investments · {new Date().getFullYear()}</Text>
+      <Text style={styles.sectionTitle}>Savings over time</Text>
+      <Text style={styles.subtitle}>{label} · {new Date().getFullYear()}</Text>
       {points.length === 0 ? (
         <View style={styles.emptyState}>
-          <Text style={styles.sectionTitle}>Ingen måneder registreret</Text>
-          <Text style={styles.subtitle}>Tilføj månedlige værdier under Income & Expenses → Savings.</Text>
+          <Text style={styles.sectionTitle}>Your savings start here</Text>
+          <Text style={styles.subtitle}>Add savings to start your graph.</Text>
         </View>
       ) : (
         <>
-          <Text style={styles.muted}>Total Savings (kr.) · Stryg for at se hele året</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator>
             <View accessible accessibilityLabel={points.map(point => `${months[point.monthIndex]}: ${money(point.amount)}`).join('. ')}>
               <Svg width={570} height={215} viewBox="0 0 570 215">
@@ -36,7 +35,6 @@ export default function SavingsChart({ history }) {
               </Svg>
             </View>
           </ScrollView>
-          <Text style={styles.muted}>Kun registrerede måneder vises som punkter. Linjen forbinder dem.</Text>
         </>
       )}
     </View>

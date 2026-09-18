@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon, ActionButton } from '../Components/FinanceUI';
 import ExpenseChart from '../Components/ExpenseChart';
 import SavingsChart from '../Components/SavingsChart';
+import ProfileAvatar from '../Components/ProfileAvatar';
 import NeyloLogo from '../Components/NeyloLogo';
 import { useFinances } from '../context/FinanceContext';
 import { money } from '../data/financeData';
@@ -31,24 +32,22 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={styles.greetingRow}>
           <View style={styles.grow}>
-            <Text style={styles.subtitle}>Dit personlige overblik</Text>
             <Text style={styles.pageTitle}>Din økonomi, samlet.</Text>
           </View>
-          <View style={styles.avatar}><Text style={styles.avatarText}>A</Text></View>
+          <ProfileAvatar />
         </View>
         <View style={styles.balanceCard}>
           <View style={styles.between}>
             <Text style={styles.balanceLabel}>Savings</Text>
             <Icon name="wallet-outline" color="#d9e5df" />
           </View>
-          <Text style={styles.balanceValue}>{money(totals.totalSavings)}</Text>
+          <Text style={styles.balanceValue}>{money(totals.savings)}</Text>
           <View style={styles.balanceFooter}>
-            <Text style={styles.balanceFootText}>SAVINGS + INVESTMENTS</Text>
+            <Text style={styles.balanceFootText}>TOTAL SAVINGS</Text>
           </View>
         </View>
         <View style={styles.sectionHeading}>
           <Text style={styles.sectionTitle}>Dit månedlige budget</Text>
-          <Text style={styles.muted}>Opdateres live</Text>
         </View>
         <View style={styles.metricGrid}>
           {metrics.map(item => (
@@ -77,14 +76,13 @@ export default function HomeScreen({ navigation }) {
             </View>
           ))}
         </View>
-        <ExpenseChart expenses={data.expenses} />
-        <SavingsChart history={monthlySavings} />
+        <View><ExpenseChart expenses={data.expenses} /></View>
+        <View><SavingsChart history={monthlySavings} /></View>
         <View style={styles.advisorTeaser}>
           <Text style={styles.sectionTitle}>Dit overblik starter med dine tal.</Text>
           <Text style={styles.teaserText}>Tilføj eller ret dine poster. Budget, formue og udgiftsfordeling følger automatisk med.</Text>
           <ActionButton label="Administrer din økonomi" onPress={() => navigation.navigate('Income & Expenses')} />
         </View>
-        <Text style={styles.footnote}>Lokal prototype · Ændringer nulstilles, når appen genindlæses.</Text>
       </ScrollView>
     </SafeAreaView>
   );

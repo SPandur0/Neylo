@@ -5,15 +5,7 @@ export const groups = [
   { key: 'investments', label: 'Investments', icon: 'stats-chart-outline' },
 ];
 
-export const expenseCategories = [
-  { name: 'Housing', color: '#285747' },
-  { name: 'Food', color: '#87a975' },
-  { name: 'Transport', color: '#bdcc9c' },
-  { name: 'Insurance', color: '#b4a3ca' },
-  { name: 'Subscriptions', color: '#d59f7d' },
-  { name: 'Entertainment', color: '#83aeb4' },
-  { name: 'Other', color: '#a9afa5' },
-];
+const expenseColors = ['#285747', '#87a975', '#bdcc9c', '#b4a3ca', '#d59f7d', '#83aeb4', '#a9afa5'];
 
 export const initialData = {
   income: [{ id: 'income-1', name: 'Salary', amount: 35000 }],
@@ -42,14 +34,24 @@ export function calculateTotals(data) {
   return {
     ...totals,
     cashFlow: Math.round((totals.income - totals.expenses) * 100) / 100,
-    totalSavings: Math.round((totals.savings + totals.investments) * 100) / 100,
+    totalSavings: totals.savings,
   };
 }
 
 export function expenseBreakdown(expenses) {
   const total = sumAmounts(expenses);
-  return expenseCategories.map(category => {
-    const amount = sumAmounts(expenses.filter(item => item.category === category.name));
+  const categories = new Map();
+  for (const item of expenses) {
+    const key = item.category_id ?? item.category;
+    if (!categories.has(key)) categories.set(key, {
+      id: key, name: item.category,
+      color: expenseColors[item.category_id ? (Number(item.category_id) - 1) % expenseColors.length : categories.size % expenseColors.length],
+      minor: 0,
+    });
+    categories.get(key).minor += Math.round(item.amount * 100);
+  }
+  return [...categories.values()].map(({ minor, ...category }) => {
+    const amount = minor / 100;
     return { ...category, amount, share: total > 0 ? amount / total : 0 };
   }).filter(category => category.amount > 0);
 }
@@ -83,10 +85,6 @@ export const initialMonthlySavings = [
   85000, 92000, 98000, 105000, 111000, 118000,
   123000, 128000, 136400, null, null, null,
 ];
-
-export function updateMonthlySavings(history, monthIndex, amount) {
-  return history.map((value, index) => index === monthIndex ? amount : value);
-}
 
 export function savingsHistoryPoints(history) {
   return history.flatMap((amount, monthIndex) => amount === null ? [] : [{ monthIndex, amount }]);

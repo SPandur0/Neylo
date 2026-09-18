@@ -17,22 +17,25 @@ export function PageHeader({
   return <View style={styles.pageHeader}>
     <Text style={styles.eyebrow}>{eyebrow}</Text>
     <Text style={styles.pageTitle}>{title}</Text>
-    <Text style={styles.subtitle}>{subtitle}</Text>
+    {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
   </View>;
 }
 export function ActionButton({
   label,
   onPress,
   secondary = false,
+  variant = secondary ? 'secondary' : 'primary',
+  disabled = false,
   icon = 'arrow-forward',
   iconFirst = false
 }) {
-  return <Pressable accessibilityRole="button" onPress={onPress} style={({
+  const isSecondary = variant === 'secondary';
+  return <Pressable accessibilityRole="button" accessibilityState={{ disabled }} disabled={disabled} onPress={onPress} style={({
     pressed
-  }) => [styles.button, secondary && styles.secondaryButton, pressed && styles.pressed]}>
-    {iconFirst && <Icon name={icon} color={secondary ? colors.green : '#fff'} size={18} />}
-    <Text style={[styles.buttonText, secondary && styles.secondaryButtonText]}>{label}</Text>
-    {!iconFirst && <Icon name={icon} color={secondary ? colors.green : '#fff'} size={18} />}
+  }) => [styles.button, isSecondary && styles.secondaryButton, variant === 'destructive' && styles.destructiveButton, pressed && !disabled && (isSecondary ? styles.secondaryButtonPressed : styles.pressed), disabled && styles.disabledButton]}>
+    {iconFirst && <Icon name={icon} color={isSecondary ? colors.green : '#fff'} size={18} />}
+    <Text style={[styles.buttonText, isSecondary && styles.secondaryButtonText]}>{label}</Text>
+    {!iconFirst && <Icon name={icon} color={isSecondary ? colors.green : '#fff'} size={18} />}
   </Pressable>;
 }
 export function TransactionRow({

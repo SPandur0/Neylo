@@ -5,7 +5,7 @@ import test from 'node:test';
 // Load the same plain JavaScript helpers used by React Native without changing
 // the Expo project's module configuration or adding a test dependency.
 const source = await readFile(new URL('../data/financeData.js', import.meta.url), 'utf8');
-const { initialData, groups, calculateTotals, expenseBreakdown, parseAmount, sumAmounts, saveEntry, deleteEntry, initialMonthlySavings, updateMonthlySavings, savingsHistoryPoints } =
+const { initialData, groups, calculateTotals, expenseBreakdown, parseAmount, sumAmounts, saveEntry, deleteEntry, savingsHistoryPoints } =
   await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
 
 test('rent increase updates expenses, cash flow and chart, but not total savings', () => {
@@ -33,9 +33,9 @@ test('add, edit and delete work in each group without mutating start data', () =
   }
 });
 
-test('only balance groups affect total savings', () => {
+test('only savings accounts affect total savings', () => {
   const before = calculateTotals(initialData);
-  for (const [key, effect] of [['income', 0], ['expenses', 0], ['savings', 200], ['investments', 200]]) {
+  for (const [key, effect] of [['income', 0], ['expenses', 0], ['savings', 200], ['investments', 0]]) {
     const after = calculateTotals(saveEntry(initialData, key, { id: 'new', amount: 200, category: 'Other' }));
     assert.equal(after.totalSavings - before.totalSavings, effect);
   }
@@ -68,24 +68,15 @@ test('empty accounts and negative cash flow stay valid', () => {
   assert.equal(calculateTotals(data).cashFlow, -100);
 });
 
-test('Savings combines accounts and investments without debt', () => {
+test('Savings excludes investments', () => {
   const data = { ...initialData, savings: [{ amount: 80000 }], investments: [{ amount: 45000 }] };
-  assert.equal(calculateTotals(data).totalSavings, 125000);
+  assert.equal(calculateTotals(data).totalSavings, 80000);
   assert.deepEqual(groups.map(group => group.key), ['income', 'expenses', 'savings', 'investments']);
   assert.equal('debt' in calculateTotals(data), false);
 });
 
-test('monthly history edits replace points, preserve order and do not change current totals', () => {
-  const before = calculateTotals(initialData);
-  let history = updateMonthlySavings(initialMonthlySavings, 3, 125000);
-  history = updateMonthlySavings(history, 0, 105000);
-  assert.deepEqual(savingsHistoryPoints(history), [{ monthIndex: 0, amount: 105000 }, { monthIndex: 3, amount: 125000 }]);
-  history = updateMonthlySavings(history, 0, 112000);
-  assert.equal(savingsHistoryPoints(history)[0].amount, 112000);
-  history = updateMonthlySavings(history, 3, 0);
-  assert.equal(savingsHistoryPoints(history)[1].amount, 0);
-  history = updateMonthlySavings(history, 0, null);
-  assert.deepEqual(savingsHistoryPoints(history), [{ monthIndex: 3, amount: 0 }]);
-  assert.deepEqual(savingsHistoryPoints(initialMonthlySavings), []);
-  assert.deepEqual(calculateTotals(initialData), before);
+test('derived chart points omit unknown months and retain zero balances', () => {
+  assert.deepEqual(savingsHistoryPoints([null, 0, 124000, null]), [
+    { monthIndex: 1, amount: 0 }, { monthIndex: 2, amount: 124000 },
+  ]);
 });
