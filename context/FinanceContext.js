@@ -93,7 +93,7 @@ export function FinanceProvider({ children, onReady }) {
     setData(current => deleteEntry(current, group, id));
   }
 
-  if (error) return <View style={[styles.screen, { justifyContent: 'center', padding: 24 }]}>
+  if (error) return <View style={[styles.screen, styles.loadError]}>
     <Text accessibilityRole="alert" style={styles.error}>Dine data kunne ikke indlæses. Prøv igen.</Text>
     <ActionButton label="Prøv igen" onPress={() => setAttempt(value => value + 1)} />
   </View>;

@@ -9,6 +9,7 @@ export const colors = {
   border: '#e7ebe4'
 };
 export const styles = StyleSheet.create({
+  loadError: { justifyContent: 'center', padding: 24 },
   chartCard: { padding: 20, marginTop: 24, borderRadius: 22, backgroundColor: '#fff', borderWidth: 1, borderColor: colors.border, gap: 8 },
   pieWrap: { alignItems: 'center', marginVertical: 14 },
   legendRow: { flexDirection: 'row', alignItems: 'center', gap: 9, paddingVertical: 6 },

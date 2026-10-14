@@ -1,5 +1,6 @@
+import { styles } from '../styles/pagerStyles';
 import { useEffect, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { createNavigatorFactory, TabRouter, useNavigationBuilder } from '@react-navigation/native';
 import { BottomTabBar } from '@react-navigation/bottom-tabs';
@@ -70,9 +71,6 @@ function PagerNavigator(props) {
   </NavigationContent>;
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  page: { width: '100%', height: '100%' },
-});
+
 
 export const createPagerNavigator = createNavigatorFactory(PagerNavigator);

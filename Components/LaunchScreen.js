@@ -1,5 +1,7 @@
+import { opacityStyle } from '../styles/dynamicStyles';
+import { launchStyles } from '../styles/launchStyles';
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, Image, Platform, StyleSheet, View } from 'react-native';
+import { Animated, Easing, Image, Platform, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 
 export const neyloSplash = require('../assets/branding/neylo-splash.png');
@@ -13,7 +15,7 @@ if (Platform.OS !== 'web') {
   SplashScreen.setOptions({ fade: false });
 }
 
-export default function LaunchScreen({ ready, children, onFinished }) {
+export default function LaunchScreen({ ready, children }) {
   const opacity = useRef(new Animated.Value(1)).current;
   const [visible, setVisible] = useState(true);
   const [imageReady, setImageReady] = useState(false);
@@ -50,18 +52,17 @@ export default function LaunchScreen({ ready, children, onFinished }) {
     animation.start(({ finished }) => {
       if (finished) {
         setVisible(false);
-        onFinished?.();
       }
     });
     return () => animation.stop();
-  }, [ready, holdComplete, visible, opacity, onFinished]);
+  }, [ready, holdComplete, visible, opacity]);
 
   return <View style={launchStyles.root}>
     <View style={launchStyles.root} accessibilityElementsHidden={visible} importantForAccessibility={visible ? 'no-hide-descendants' : 'auto'}>
       {children}
     </View>
     {visible && <Animated.View
-      style={[launchStyles.overlay, { opacity }]}
+      style={[launchStyles.overlay, opacityStyle(opacity)]}
       onLayout={() => setLayoutReady(true)}
       accessibilityViewIsModal
     >
@@ -76,14 +77,3 @@ export default function LaunchScreen({ ready, children, onFinished }) {
     </Animated.View>}
   </View>;
 }
-
-const launchStyles = StyleSheet.create({
-  root: { flex: 1 },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#fefcfa',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  artwork: { width: 360, maxWidth: '100%', aspectRatio: 1 },
-});

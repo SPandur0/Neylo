@@ -19,4 +19,6 @@ Open the localhost URL shown in the terminal.
 
 ## Demo video
 
-(https://youtube.com/shorts/tf-A_R1BAlI?feature=share)
+(https://youtube.com/shorts/-BAoCUSEK70?feature=share)
+
+

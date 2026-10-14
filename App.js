@@ -1,10 +1,10 @@
+import { createDetailNavigator } from './navigation/DetailNavigator';
+import SavingsDetailsScreen from './screens/SavingsDetailsScreen';
 import { useCallback, useEffect, useState } from 'react';
 import { createPagerNavigator } from './navigation/PagerNavigator';
 import { StatusBar } from 'expo-status-bar';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import AppLockGate from './Components/AppLockGate';
-import { AppLockProvider, useAppLock } from './context/AppLockContext';
 import LaunchScreen, { neyloSplash } from './Components/LaunchScreen';
 import { neyloSymbol } from './Components/NeyloLogo';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
@@ -16,6 +16,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import { FinanceProvider } from './context/FinanceContext';
 import { colors, styles } from './styles/styles';
 const Tab = createPagerNavigator();
+const Stack = createDetailNavigator();
 const icons = {
   Home: 'grid-outline',
   'Income & Expenses': 'swap-horizontal-outline',
@@ -33,11 +34,6 @@ const theme = {
   }
 };
 export default function App() {
-  return <AppLockProvider><AppContent /></AppLockProvider>;
-}
-
-function AppContent() {
-  const lock = useAppLock();
   const [resourcesReady, setResourcesReady] = useState(false);
   const [databaseReady, setDatabaseReady] = useState(false);
   const handleDatabaseReady = useCallback(() => setDatabaseReady(true), []);
@@ -58,31 +54,38 @@ function AppContent() {
 
   return <SafeAreaProvider>
     <StatusBar style="dark" />
-    <LaunchScreen ready={resourcesReady && lock.ready && (lock.locked || databaseReady)} onFinished={lock.controller.finishSplash}>
-    <AppLockGate>
+    <LaunchScreen ready={resourcesReady && databaseReady}>
     <FinanceProvider onReady={handleDatabaseReady}>
     <NavigationContainer theme={theme}>
-      <Tab.Navigator screenOptions={({
-        route
-      }) => ({
-        headerShown: false,
-        tabBarActiveTintColor: colors.green,
-        tabBarInactiveTintColor: colors.muted,
-        tabBarStyle: styles.tabBar,
-        tabBarLabelStyle: styles.tabLabel,
-        tabBarItemStyle: styles.tabItem,
-        tabBarIcon: ({
-          color,
-          size
-        }) => <Ionicons name={icons[route.name]} size={size} color={color} />
-      })}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Income & Expenses" component={IncomeExpensesScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator initialRouteName="MainTabs">
+        <Stack.Screen name="MainTabs" component={MainTabs} />
+        <Stack.Screen name="SavingsDetails" component={SavingsDetailsScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
     </FinanceProvider>
-    </AppLockGate>
     </LaunchScreen>
   </SafeAreaProvider>;
+}
+
+function MainTabs() {
+  return (
+    <Tab.Navigator screenOptions={({
+      route
+    }) => ({
+      headerShown: false,
+      tabBarActiveTintColor: colors.green,
+      tabBarInactiveTintColor: colors.muted,
+      tabBarStyle: styles.tabBar,
+      tabBarLabelStyle: styles.tabLabel,
+      tabBarItemStyle: styles.tabItem,
+      tabBarIcon: ({
+        color,
+        size
+      }) => <Ionicons name={icons[route.name]} size={size} color={color} />
+    })}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Income & Expenses" component={IncomeExpensesScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
 }

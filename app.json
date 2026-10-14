@@ -14,11 +14,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#fdfcfb",
         "foregroundImage": "./assets/branding/neylo-icon.png"
-      },
-      "permissions": [
-        "android.permission.USE_BIOMETRIC",
-        "android.permission.USE_FINGERPRINT"
-      ]
+      }
     },
     "web": {
       "favicon": "./assets/branding/neylo-icon.png"
@@ -39,13 +35,7 @@
       ],
       "expo-font",
       "expo-asset",
-      "expo-sqlite",
-      [
-        "expo-local-authentication",
-        {
-          "faceIDPermission": "Allow Neylo to use Face ID to protect your financial information."
-        }
-      ]
+      "expo-sqlite"
     ]
   }
 }
