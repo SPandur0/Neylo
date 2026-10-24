@@ -1,3 +1,4 @@
+// Denne repository gemmer brugerens navn i profil-tabellen, så appen kan vise samme navn ved genåbning.
 import { withDatabase } from '../database.js';
 
 export function getName() {

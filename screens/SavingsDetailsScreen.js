@@ -1,3 +1,4 @@
+// Denne skærm viser én opsparingskonto med saldo, aktivitet og mulighed for at indbetale, hæve, overføre eller arkivere penge.
 import { useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

@@ -1,3 +1,4 @@
+// Denne navigator viser appens hovedfaner som sidevisning, så brugeren kan skifte mellem oversigt, økonomi og indstillinger uden at miste kontekst.
 import { styles } from '../styles/pagerStyles';
 import { useEffect, useRef } from 'react';
 import { View } from 'react-native';

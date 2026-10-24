@@ -1,3 +1,4 @@
+// Denne navigator viser skærme i en stak, så brugeren kan åbne detaljerne for en opsparing og derefter gå tilbage igen.
 import { View } from 'react-native';
 import { createNavigatorFactory, StackRouter, useNavigationBuilder } from '@react-navigation/native';
 import { detailNavigationStyles as styles } from '../styles/detailNavigationStyles';

@@ -1,3 +1,4 @@
+// Denne skærm lader brugeren tilføje og redigere indtægter, udgifter og andre finansielle poster på tværs af flere grupper.
 import { useState } from 'react';
 import { FlatList, ScrollView, Text, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

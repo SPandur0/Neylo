@@ -1,3 +1,4 @@
+// Denne komponent viser Neylos splash-billede og holder appen bag native startskærm, indtil data og visuelle ressourcer er klare.
 import { opacityStyle } from '../styles/dynamicStyles';
 import { launchStyles } from '../styles/launchStyles';
 import { useEffect, useRef, useState } from 'react';

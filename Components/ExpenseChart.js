@@ -1,3 +1,4 @@
+// Denne graf viser, hvor store udgifterne er fordelt på kategorier, så brugeren hurtigt kan se den største belastning.
 import { Text, View, useWindowDimensions } from 'react-native';
 import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
 import { expenseBreakdown, money } from '../data/financeData';

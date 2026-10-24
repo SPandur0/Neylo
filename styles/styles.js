@@ -1,3 +1,4 @@
+// Denne fil samler appens hovedstilark og giver de konsistente farver, layoutmønstre og knapstile, som hele appen bruger.
 import { StyleSheet } from 'react-native';
 export const colors = {
   background: '#f6f7f3',

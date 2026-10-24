@@ -1,3 +1,4 @@
+// Denne repository læser og opdaterer udgiftsposter og holder kategorier, måned og beløb konsistente i databasen.
 import { withDatabase } from '../database.js';
 import { toMinorUnits, validatePeriod } from '../money.js';
 

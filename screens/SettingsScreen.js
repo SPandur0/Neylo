@@ -1,3 +1,4 @@
+// Denne skærm viser brugerprofilen og de få indstillinger, som appen bruger til at vise navn og demo-præferencer.
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Switch, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

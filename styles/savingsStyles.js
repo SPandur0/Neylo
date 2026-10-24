@@ -1,3 +1,4 @@
+// Denne fil styrer oversigten over opsparingskonti, herunder menu, kort og handlinger for hver konto.
 import { StyleSheet } from 'react-native';
 import { colors } from './styles';
 

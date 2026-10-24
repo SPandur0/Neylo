@@ -1,3 +1,4 @@
+// Denne fil registrerer appen som Expo's hovedkomponent, så den kan startes korrekt på mobil og web.
 import { registerRootComponent } from 'expo';
 
 import App from './App';

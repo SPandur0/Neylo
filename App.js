@@ -1,3 +1,4 @@
+// Denne fil sætter appens startoplevelse op: den loader ressourcer, kobler finansdata til navigationen og samler oversigt og detaljeskærme i én app.
 import { createDetailNavigator } from './navigation/DetailNavigator';
 import SavingsDetailsScreen from './screens/SavingsDetailsScreen';
 import { useCallback, useEffect, useState } from 'react';

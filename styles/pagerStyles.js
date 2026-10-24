@@ -1,3 +1,4 @@
+// Denne fil styrer layoutet til den sidebaserede navigationsvisning, så hovedfanerne får den rette størrelse og spacing.
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({

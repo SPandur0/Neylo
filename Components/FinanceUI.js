@@ -1,3 +1,4 @@
+// Denne fil samler de gentagne UI-elementer, som skærmene bruger til ikoner, knapper, overskrifter og transaktionsrækker.
 import { Text, View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles, colors } from '../styles/styles';

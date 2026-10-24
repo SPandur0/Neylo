@@ -1,3 +1,4 @@
+// Denne modal bruges til at oprette eller redigere en finanspost og kan også håndtere sletning samt kategorier i udgifter.
 import { useEffect, useRef, useState } from 'react';
 import { Modal, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

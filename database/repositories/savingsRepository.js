@@ -1,3 +1,4 @@
+// Denne repository håndterer opsparingskonti, transaktioner og historik, så saldoen, grafer og arkiv følger samme regnskabslogik.
 import { withDatabase } from '../database.js';
 import { toMinorUnits, validatePeriod } from '../money.js';
 

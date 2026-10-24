@@ -1,3 +1,4 @@
+// Denne graf viser udviklingen i opsparingen over tid og gør det nemt at følge vækst eller fald i hver måned.
 import { ScrollView, Text, View } from 'react-native';
 import Svg, { Circle, Line, Path, Text as SvgText } from 'react-native-svg';
 import { months, money, savingsHistoryPoints } from '../data/financeData';

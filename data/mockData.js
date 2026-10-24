@@ -1,3 +1,4 @@
+// Denne fil indeholder demo-data til mock-screens og eksempler, så appen kan vise realistiske tal uden at være afhængig af live-data.
 export const money = value => `${new Intl.NumberFormat('da-DK', {
   maximumFractionDigits: 0
 }).format(value)} kr.`;

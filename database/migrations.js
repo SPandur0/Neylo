@@ -1,3 +1,4 @@
+// Denne fil opgraderer databasen i et par trin, så gammel data flyttes korrekt over i den nye struktur uden at miste vigtige oplysninger.
 // Identifiers below are fixed application constants, never user input.
 const migrations = [async db => {
   for (const table of ['income', 'expenses', 'savings']) {

@@ -1,3 +1,4 @@
+// Denne editor styrer udgiftskategorier og flytter eksisterende poster til en ny kategori, hvis en kategori slettes.
 import { useRef, useState } from 'react';
 import { ScrollView, Text, TextInput, View } from 'react-native';
 import { useFinances } from '../context/FinanceContext';

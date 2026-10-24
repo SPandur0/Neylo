@@ -1,3 +1,4 @@
+// Denne fil indeholder de fælles beregninger og formateringsfunktioner, som appen bruger til totals, kategorier og grafer.
 export const groups = [
   { key: 'income', label: 'Income', icon: 'arrow-down-outline' },
   { key: 'expenses', label: 'Expenses', icon: 'arrow-up-outline' },

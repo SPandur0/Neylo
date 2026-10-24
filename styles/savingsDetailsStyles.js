@@ -1,3 +1,4 @@
+// Denne fil styrer detaljskærmen for en opsparingskonto, herunder saldo, handlinger og transaktionsliste.
 import { StyleSheet } from 'react-native';
 import { colors } from './styles';
 

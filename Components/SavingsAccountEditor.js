@@ -1,3 +1,4 @@
+// Denne modal håndterer oprettelse, omdøbning, overførsel og arkivering af opsparingskonti med validering af saldo og dato.
 import { useRef, useState } from 'react';
 import { Modal, ScrollView, Text, TextInput, View, Pressable, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

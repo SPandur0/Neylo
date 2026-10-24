@@ -1,3 +1,4 @@
+// Denne fil styrer startskærmen, så logoen og overlayet fylder skærmen og vises i den ønskede tid.
 import { StyleSheet } from 'react-native';
 
 export const launchStyles = StyleSheet.create({

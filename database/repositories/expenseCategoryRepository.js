@@ -1,3 +1,4 @@
+// Denne repository styrer de faste kategorier for udgifter og sikrer, at der ikke skabes dubletter eller uvalidér data.
 import { withDatabase } from '../database.js';
 import { categoryName } from '../categoryNames.js';
 

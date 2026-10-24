@@ -1,3 +1,4 @@
+// Denne skærm viser en samlet økonomioversigt, så brugeren kan se saldo, indtægter, udgifter og udviklingen i opsparingen.
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon, ActionButton } from '../Components/FinanceUI';

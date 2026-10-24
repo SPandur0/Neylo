@@ -1,3 +1,4 @@
+// Disse tests kontrollerer brugergrænsefladens små regler, for eksempel hvordan profilinitialer skal vises i avataren.
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { profileInitial } from '../data/profile.js';

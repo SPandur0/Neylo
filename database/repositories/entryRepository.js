@@ -1,3 +1,4 @@
+// Denne repository håndterer de almindelige CRUD-operationer for indtægter, udgifter og opsparingsposter i den relevante tabel.
 import { withDatabase } from '../database.js';
 import { toMinorUnits, validatePeriod } from '../money.js';
 

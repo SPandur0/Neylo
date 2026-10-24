@@ -1,3 +1,4 @@
+// Denne konfiguration tilpasser Metro til Expo og sætter de web-headere, som SQLite-arbejdere kræver i browseren.
 const { getDefaultConfig } = require('expo/metro-config');
 
 const config = getDefaultConfig(__dirname);

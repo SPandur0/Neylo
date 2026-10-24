@@ -1,3 +1,4 @@
+// Denne komponent viser appens logo i forskellige størrelser uden at ændre selve branddesignet.
 import { squareSize } from '../styles/dynamicStyles';
 import { Image } from 'react-native';
 

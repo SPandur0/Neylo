@@ -1,3 +1,4 @@
+// Denne fil normaliserer kategorinavne, så variationer i mellemrum, store bogstaver og unicode behandles ens.
 export function categoryName(value) {
   if (typeof value !== 'string' || !value.trim()) throw new Error('Skriv et navn til kategorien.');
   const name = value.trim().normalize('NFC');

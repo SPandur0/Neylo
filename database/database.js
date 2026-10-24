@@ -1,3 +1,4 @@
+// Denne fil opretter og cacher appens SQLite-forbindelse, aktiverer sikkerhedsindstillinger og kører migrationer før første brug.
 import { openDatabaseAsync } from 'expo-sqlite';
 import { migrateDatabase } from './migrations.js';
 

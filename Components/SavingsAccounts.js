@@ -1,3 +1,4 @@
+// Denne komponent viser oversigten over opsparingskonti og giver adgang til de mest almindelige handlinger som indbetaling, hævning og arkivering.
 import { overviewStyles } from '../styles/savingsStyles';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';

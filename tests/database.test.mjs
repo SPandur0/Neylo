@@ -1,3 +1,4 @@
+// Disse tests kontrollerer migrationer, dataopbevaring og sikkerhed i SQLite-laget, så ældre data og nye tabeller kan håndteres sikkert.
 import assert from 'node:assert/strict';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

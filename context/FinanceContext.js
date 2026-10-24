@@ -1,3 +1,4 @@
+// Denne provider samler appens finansdata og sørger for, at skærme får de samme opdaterede værdier fra lokal database og opsparingssnapshot.
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
 import { calculateTotals, saveEntry, deleteEntry } from '../data/financeData';

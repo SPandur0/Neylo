@@ -1,3 +1,4 @@
+// Denne repository håndterer investeringsposter på samme måde som andre standardposter, men uden at tælle med i den samlede opsparingssum.
 import { createEntryRepository } from './entryRepository.js';
 
 const repository = createEntryRepository('savings', 'investments');
